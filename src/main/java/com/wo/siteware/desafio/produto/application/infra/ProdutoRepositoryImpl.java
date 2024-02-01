@@ -1,7 +1,7 @@
-package com.wo.siteware.desafio.produtos.application.infra;
+package com.wo.siteware.desafio.produto.application.infra;
 
-import com.wo.siteware.desafio.produtos.application.repository.ProdutoRepository;
-import com.wo.siteware.desafio.produtos.domain.Produto;
+import com.wo.siteware.desafio.produto.application.repository.ProdutoRepository;
+import com.wo.siteware.desafio.produto.domain.Produto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -19,18 +19,18 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     }
 
     @Override
-    public List<Produto> buscaTodosOsProdutos() {
+    public List<Produto> buscaProdutos() {
         return produtoSpringJpaRepository.findAll();
     }
 
     @Override
     public Produto buscaProdutoPorId(UUID idProduto) {
         return produtoSpringJpaRepository.findById(idProduto)
-                .orElseThrow(()-> new RuntimeException("Produto não encotrado"));
+                .orElseThrow(() -> new RuntimeException("Produto não existe"));
     }
-
     @Override
     public void deleteProduto(Produto produto) {
         produtoSpringJpaRepository.delete(produto);
     }
+
 }

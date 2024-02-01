@@ -1,7 +1,8 @@
-package com.wo.siteware.desafio.produtos.domain;
+package com.wo.siteware.desafio.produto.domain;
 
-import com.wo.siteware.desafio.produtos.application.api.ProdutoEditRequest;
-import com.wo.siteware.desafio.produtos.application.api.ProdutoRequest;
+import com.wo.siteware.desafio.produto.application.api.ProdutoEditRequest;
+import com.wo.siteware.desafio.produto.application.api.ProdutoRequest;
+import com.wo.siteware.desafio.produto.application.api.ProdutoRequestPromo;
 import jakarta.persistence.Column;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +22,11 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
+    @Column(columnDefinition = "uuid", name = "idProduto", updatable = false, unique = true, nullable = false)
     private UUID idProduto;
+    @Column(columnDefinition = "uuid", name = "idPromo", updatable = false, unique = true)
+    private UUID idPromo;
+
     @NotBlank
     private String nome;
     @NotNull
@@ -36,10 +40,15 @@ public class Produto {
         this.preco = produtoRequest.preco();
         this.dataHoraCadastro = LocalDate.now();
     }
+    public Produto(UUID idPromo, ProdutoRequestPromo produto) {
+        this.idPromo = idPromo;
+        this.nome = produto.nome();
+        this.preco = produto.preco();
+        this.dataHoraCadastro = LocalDate.now();
+    }
 
-    public void editaProduto(ProdutoEditRequest produtoEditRequest) {
-        this.nome = produtoEditRequest.nome();
-        this.preco = produtoEditRequest.preco();
+    public void atualizaProduto(ProdutoEditRequest produto) {
+        this.preco = produto.preco();
         this.dataHoraUltimaAlteracao = LocalDate.now();
     }
 }
