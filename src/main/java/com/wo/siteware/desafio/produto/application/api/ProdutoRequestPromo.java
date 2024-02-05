@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record ProdutoRequestPromo(@NotBlank String nome, @NotNull Integer preco, UUID idPromo) {
+public record ProdutoRequestPromo(@NotBlank String nome, @NotNull Integer preco, String promocaoId) {
 }

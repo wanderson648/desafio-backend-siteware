@@ -23,14 +23,4 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
         return produtoSpringJpaRepository.findAll();
     }
 
-    @Override
-    public Produto buscaProdutoPorId(UUID idProduto) {
-        return produtoSpringJpaRepository.findById(idProduto)
-                .orElseThrow(() -> new RuntimeException("Produto não existe"));
-    }
-    @Override
-    public void deleteProduto(Produto produto) {
-        produtoSpringJpaRepository.delete(produto);
-    }
-
 }

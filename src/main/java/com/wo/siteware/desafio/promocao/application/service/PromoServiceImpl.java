@@ -16,33 +16,22 @@ public class PromoServiceImpl implements PromoService {
     private final PromoRepository promoRepository;
 
     @Override
-    public PromoResponse criaPromo(PromoRequest promoRequest) {;
-        Promocao promocao = promoRepository.salvaPromo(new Promocao(promoRequest));
-        return new PromoResponse(promocao.getIdPromo());
-    }
-
-    @Override
-    public PromocaoProdutoDetalhado buscaPromoComId(UUID idPromo) {
-        Promocao promocao = promoRepository.buscaPromoComId(idPromo);
-        return new PromocaoProdutoDetalhado(promocao);
-    }
-
-    @Override
-    public void deletaPromoPeloId(UUID idPromo) {
-        promoRepository.deletaPromoPeloId(idPromo);
-    }
-
-    @Override
-    public PromocaoEditRequest editaPromocao(UUID idPromo, PromocaoEditRequest promoEditRequest) {
-        Promocao promocao = new Promocao();
-        promocao.editaPromo(promoEditRequest);
+    public Promocao criaPromo(PromoRequest promoRequest) {
+        Promocao promocao = new Promocao(promoRequest);
         promoRepository.salvaPromo(promocao);
-        return new PromocaoEditRequest(promocao.getNome(), promocao.getDescricao());
+        return promocao;
     }
 
     @Override
-    public List<PromocaoListResponse> buscaPromocoes() {
-        List<Promocao> promocoes = promoRepository.buscaPromocoes();
+    public Promocao buscaPromoComId(String idPromo) {
+        Promocao promocao = promoRepository.buscaPromoComId(idPromo);
+        return new Promocao(promocao);
+    }
+
+    @Override
+    public List<PromocaoListResponse> getPromocoes() {
+        List<Promocao> promocoes = promoRepository.getPromocoes();
         return PromocaoListResponse.convert(promocoes);
     }
+
 }

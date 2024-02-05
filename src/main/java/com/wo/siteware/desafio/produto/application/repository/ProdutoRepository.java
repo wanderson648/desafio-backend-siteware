@@ -8,6 +8,4 @@ import java.util.UUID;
 public interface ProdutoRepository {
     Produto salva(Produto produto);
     List<Produto> buscaProdutos();
-    Produto buscaProdutoPorId(UUID idProduto);
-    void deleteProduto(Produto produto);
 }

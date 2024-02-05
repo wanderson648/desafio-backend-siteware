@@ -3,13 +3,14 @@ package com.wo.siteware.desafio.produto.domain;
 import com.wo.siteware.desafio.produto.application.api.ProdutoEditRequest;
 import com.wo.siteware.desafio.produto.application.api.ProdutoRequest;
 import com.wo.siteware.desafio.produto.application.api.ProdutoRequestPromo;
-import jakarta.persistence.Column;
+import com.wo.siteware.desafio.promocao.domain.Promocao;
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,9 +24,11 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "uuid", name = "idProduto", updatable = false, unique = true, nullable = false)
-    private UUID idProduto;
-    @Column(columnDefinition = "uuid", name = "idPromo", updatable = false, unique = true)
-    private UUID idPromo;
+    private UUID produtoId;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idPromo", updatable = false, unique = true)
+    private Promocao promoId;
 
     @NotBlank
     private String nome;
@@ -35,15 +38,15 @@ public class Produto {
     private LocalDate dataHoraCadastro;
     private LocalDate dataHoraUltimaAlteracao;
 
-    public Produto(ProdutoRequest produtoRequest) {
+    public Produto(ProdutoRequestPromo produtoRequest) {
         this.nome = produtoRequest.nome();
         this.preco = produtoRequest.preco();
         this.dataHoraCadastro = LocalDate.now();
     }
-    public Produto(UUID idPromo, ProdutoRequestPromo produto) {
-        this.idPromo = idPromo;
-        this.nome = produto.nome();
-        this.preco = produto.preco();
+
+    public Produto(ProdutoRequest prodRequest) {
+        this.nome = prodRequest.nome();
+        this.preco = prodRequest.preco();
         this.dataHoraCadastro = LocalDate.now();
     }
 

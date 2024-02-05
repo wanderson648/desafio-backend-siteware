@@ -29,6 +29,12 @@ public class Promocao {
 
     LocalDate dataHoraCadastroPromocao;
 
+    public Promocao(Promocao promocao) {
+        this.nome = promocao.getNome();
+        this.descricao = promocao.getDescricao();
+        this.dataHoraCadastroPromocao = LocalDate.now();
+    }
+
     public Promocao(PromoRequest promoRequest) {
         this.nome = promoRequest.nome();
         this.descricao = promoRequest.descricao();

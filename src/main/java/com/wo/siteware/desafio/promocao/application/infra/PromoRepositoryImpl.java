@@ -19,18 +19,19 @@ public class PromoRepositoryImpl implements PromoRepository {
     }
 
     @Override
-    public Promocao buscaPromoComId(UUID idPromo) {
-        return promoSpringJpaRepository.findById(idPromo)
+    public Promocao buscaPromoComId(String idPromo) {
+        return promoSpringJpaRepository.findById(UUID.fromString(idPromo))
                 .orElseThrow(() -> new RuntimeException("Promoção não existe"));
     }
 
     @Override
-    public void deletaPromoPeloId(UUID idPromo) {
-        promoSpringJpaRepository.findById(idPromo);
-    }
-
-    @Override
-    public List<Promocao> buscaPromocoes() {
+    public List<Promocao> getPromocoes() {
         return promoSpringJpaRepository.findAll();
     }
+
+//    @Override
+//    public void deletaPromoPeloId(String idPromo) {
+//        promoSpringJpaRepository.findById(idPromo);
+//    }
+
 }

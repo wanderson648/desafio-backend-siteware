@@ -1,5 +1,6 @@
 package com.wo.siteware.desafio.promocao.application.api;
 
+import com.wo.siteware.desafio.promocao.domain.Promocao;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,23 +14,23 @@ public interface PromoAPI {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    PromoResponse postPromo(@Valid @RequestBody PromoRequest promoRequest);
+    Promocao postPromo(@Valid @RequestBody PromoRequest promoRequest);
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
     List<PromocaoListResponse> getPromocoes();
 
-    @GetMapping(value = "/{idPromo}")
+    @GetMapping("/{idPromo}")
     @ResponseStatus(code = HttpStatus.OK)
-    PromocaoProdutoDetalhado getPromoComId(@PathVariable UUID idPromocao);
+    Promocao getPromoComId(String idPromo);
 
-    @DeleteMapping(value = "/{idPromo}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void deletaPromocao(@PathVariable UUID idPromo);
-
-    @PutMapping(value = "/{idPromo}")
-    @ResponseStatus(code = HttpStatus.OK)
-    PromocaoEditRequest editaPromo(@PathVariable UUID idPromo,
-                                   @Valid @RequestBody PromocaoEditRequest editaPromocaoRequest);
+//    @DeleteMapping(value = "/{idPromo}")
+//    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+//    void deletaPromocao(@PathVariable UUID idPromo);
+//
+//    @PutMapping(value = "/{idPromo}")
+//    @ResponseStatus(code = HttpStatus.OK)
+//    PromocaoEditRequest editaPromo(@PathVariable UUID idPromo,
+//                                   @Valid @RequestBody PromocaoEditRequest editaPromocaoRequest);
 
 }

@@ -16,7 +16,7 @@ public class ProdutoDetalhadoResponse {
     double preco;
 
     public ProdutoDetalhadoResponse(Produto produto) {
-        this.idProduto = produto.getIdProduto();
+        this.idProduto = produto.getProdutoId();
         this.nome = produto.getNome();
         this.preco = produto.getPreco();
     }
