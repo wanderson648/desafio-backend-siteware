@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CarrinhoRepositoryImpl implements CarrinhoRepository {
 
-    private CarrinhoSpringJpaRepository carrinhoSpringJpaRepository;
+    private final CarrinhoSpringJpaRepository carrinhoSpringJpaRepository;
     @Override
     public Carrinho salvaItemCarrinho(Carrinho carrinho) {
         return carrinhoSpringJpaRepository.save(carrinho);

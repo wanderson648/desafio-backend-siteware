@@ -12,8 +12,9 @@ import java.util.List;
 public class CarrinhoController implements CarrinhoAPI {
 
     private final CarrinhoService carrinhoService;
+
     @Override
-    public CarrinhoResponse postCarrinho(CarrinhoRequest produtoCarrinho) {
+    public Carrinho postCarrinho(CarrinhoRequest produtoCarrinho) {
         return carrinhoService.adicionarItemCarrinho(produtoCarrinho);
     }
 

@@ -11,4 +11,5 @@ public interface ProdutoService {
     Produto criaProduto(ProdutoRequestPromo produtoRequest);
     List<ProdutoListResponse> buscaProdutos();
     Produto criaProdutoPromo(ProdutoRequest produto);
+    Produto buscaProdutoPeloId(String produto);
 }

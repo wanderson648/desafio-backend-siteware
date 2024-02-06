@@ -2,7 +2,6 @@ package com.wo.siteware.desafio.carrinho.application.service;
 
 import com.wo.siteware.desafio.carrinho.application.api.CarrinhoListResponse;
 import com.wo.siteware.desafio.carrinho.application.api.CarrinhoRequest;
-import com.wo.siteware.desafio.carrinho.application.api.CarrinhoResponse;
 import com.wo.siteware.desafio.carrinho.application.repository.CarrinhoRepository;
 import com.wo.siteware.desafio.carrinho.domain.Carrinho;
 import com.wo.siteware.desafio.produto.application.service.ProdutoService;
@@ -19,12 +18,14 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     private final ProdutoService produtoService;
     private final CarrinhoRepository carrinhoRepository;
     @Override
-    public CarrinhoResponse adicionarItemCarrinho(CarrinhoRequest produtoCarrinho) {
-//        Produto produto = this.produtoService.buscaProdutoPeloId(produtoCarrinho.produtoId());
-//        Carrinho carrinho = new Carrinho(produtoCarrinho);
-//        carrinho.setProduto(produto);
-//        return carrinhoRepository.salvaItemCarrinho(carrinho);
-        return null;
+    public Carrinho adicionarItemCarrinho(CarrinhoRequest produtoCarrinho) {
+        Produto produto = this.produtoService.buscaProdutoPeloId(produtoCarrinho.produtoId());
+        Carrinho carrinho = new Carrinho(produtoCarrinho);
+//        carrinho.addPreco(produto);
+        carrinho.setProduto(produto);
+
+
+        return carrinhoRepository.salvaItemCarrinho(carrinho);
     }
 
     @Override

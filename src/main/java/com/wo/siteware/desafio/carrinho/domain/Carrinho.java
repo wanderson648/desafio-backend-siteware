@@ -1,11 +1,13 @@
 package com.wo.siteware.desafio.carrinho.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wo.siteware.desafio.carrinho.application.api.CarrinhoRequest;
 import com.wo.siteware.desafio.produto.domain.Produto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -21,18 +23,21 @@ public class Carrinho {
     private UUID idCarrinho;
     @NotNull
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idProduto")
     private Produto produto;
 
     private int quantidade;
+    private double total;
+
+//    List<Produto> produtos = new ArrayList<>();
 
     private LocalDate dataHoraCadastroNoCarrinho;
     private LocalDate dataHoraUltimaAlteracao;
 
     public Carrinho(CarrinhoRequest produtoCarrinho) {
-        this.produto = produtoCarrinho.produtoId();
         this.quantidade = produtoCarrinho.quantidade();
         this.dataHoraCadastroNoCarrinho = LocalDate.now();
     }
+
 }

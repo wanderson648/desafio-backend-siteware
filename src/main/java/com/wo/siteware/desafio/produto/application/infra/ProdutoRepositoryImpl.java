@@ -23,4 +23,10 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
         return produtoSpringJpaRepository.findAll();
     }
 
+    @Override
+    public Produto buscaProdutoPorId(String produto) {
+        return produtoSpringJpaRepository.findById(UUID.fromString(produto))
+                .orElseThrow(()-> new RuntimeException("Produto não encontrado"));
+    }
+
 }
