@@ -24,9 +24,10 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     }
 
     @Override
-    public Produto buscaProdutoPorId(String produto) {
-        return produtoSpringJpaRepository.findById(UUID.fromString(produto))
-                .orElseThrow(()-> new RuntimeException("Produto não encontrado"));
+    public Produto buscarUmProdutoPorId(UUID idProduto) {
+        return produtoSpringJpaRepository.findById(idProduto)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
     }
+
 
 }

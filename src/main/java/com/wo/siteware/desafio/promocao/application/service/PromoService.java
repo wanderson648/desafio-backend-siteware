@@ -1,16 +1,9 @@
 package com.wo.siteware.desafio.promocao.application.service;
 
-import com.wo.siteware.desafio.promocao.application.api.PromoRequest;
-import com.wo.siteware.desafio.promocao.application.api.PromocaoListResponse;
-import com.wo.siteware.desafio.promocao.domain.Promocao;
+import com.wo.siteware.desafio.produto.domain.Produto;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 public interface PromoService {
-    Promocao criaPromo(PromoRequest promoRequest);
-    Promocao buscaPromoComId(String idPromo);
-    List<PromocaoListResponse> getPromocoes();
-//    void deletaPromoPeloId(UUID idPromo);
-//    PromocaoEditRequest editaPromocao(UUID idPromo, PromocaoEditRequest produtoEditRequest);
-//    List<PromocaoListResponse> buscaPromocoes();
+    BigDecimal aplicarPromocao(Integer quantidade, BigDecimal preco, Produto produto);
 }

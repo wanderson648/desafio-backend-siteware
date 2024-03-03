@@ -8,8 +8,6 @@ import java.util.List;
 
 
 public interface ProdutoService {
-    Produto criaProduto(ProdutoRequestPromo produtoRequest);
     List<ProdutoListResponse> buscaProdutos();
-    Produto criaProdutoPromo(ProdutoRequest produto);
-    Produto buscaProdutoPeloId(String produto);
+    ProdutoResponse criaProduto(ProdutoRequest produtoRequest);
 }

@@ -1,4 +1,8 @@
 package com.wo.siteware.desafio.carrinho.application.api;
 
-public record CarrinhoRequest(String produtoId, int quantidade) {
+import jakarta.validation.constraints.NotNull;
+
+import java.util.UUID;
+
+public record CarrinhoRequest(@NotNull UUID idProduto) {
 }

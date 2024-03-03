@@ -1,39 +1,29 @@
 package com.wo.siteware.desafio.produto.application.service;
 
-import com.wo.siteware.desafio.produto.application.api.*;
+import com.wo.siteware.desafio.produto.application.api.ProdutoListResponse;
+import com.wo.siteware.desafio.produto.application.api.ProdutoRequest;
+import com.wo.siteware.desafio.produto.application.api.ProdutoResponse;
 import com.wo.siteware.desafio.produto.application.repository.ProdutoRepository;
 import com.wo.siteware.desafio.produto.domain.Produto;
-import com.wo.siteware.desafio.promocao.application.service.PromoService;
-import com.wo.siteware.desafio.promocao.domain.Promocao;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ProdutoServiceImpl implements ProdutoService {
 
-    private final PromoService promoService;
     private final ProdutoRepository produtoRepository;
-    @Override
-    public Produto criaProduto(ProdutoRequestPromo produtoRequest) {
-        Promocao promocao = promoService.buscaPromoComId(produtoRequest.promocaoId());
-        Produto novoProduto =  new Produto(produtoRequest);
-        novoProduto.setPromoId(promocao);
-        return produtoRepository.salva(novoProduto);
-    }
 
     @Override
-    public Produto criaProdutoPromo(ProdutoRequest prodRequest) {
-        Produto produto = new Produto(prodRequest);
-        produtoRepository.salva(produto);
-        return produto;
-    }
-
-    @Override
-    public Produto buscaProdutoPeloId(String produto) {
-        return produtoRepository.buscaProdutoPorId(produto);
+    public ProdutoResponse criaProduto(ProdutoRequest produtoRequest) {
+        log.info("[inicia] ProdutoRestController - postProduto");
+        Produto produto = produtoRepository.salva(new Produto(produtoRequest));
+        log.info("[finaliza] ProdutoRestController - postProduto");
+        return new ProdutoResponse(produto);
     }
 
     @Override
@@ -41,7 +31,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         List<Produto> produtos = produtoRepository.buscaProdutos();
         return ProdutoListResponse.convert(produtos);
     }
-
 
 
 }

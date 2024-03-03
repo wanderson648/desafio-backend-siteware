@@ -6,19 +6,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
 public class CarrinhoRepositoryImpl implements CarrinhoRepository {
 
     private final CarrinhoSpringJpaRepository carrinhoSpringJpaRepository;
+
     @Override
-    public Carrinho salvaItemCarrinho(Carrinho carrinho) {
+    public Carrinho salvarCarrinho(Carrinho carrinho) {
         return carrinhoSpringJpaRepository.save(carrinho);
     }
 
     @Override
-    public List<Carrinho> buscaItems() {
-        return carrinhoSpringJpaRepository.findAll();
+    public Carrinho buscarCarrinhoPorId(UUID idCarrinho) {
+        return carrinhoSpringJpaRepository.findById(idCarrinho)
+                .orElseThrow(() -> new RuntimeException("Carrinho não encontrado!"));
     }
 }
