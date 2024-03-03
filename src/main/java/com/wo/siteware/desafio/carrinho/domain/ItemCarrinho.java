@@ -37,4 +37,15 @@ public class ItemCarrinho {
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
 
+    public ItemCarrinho(Carrinho carrinho, Produto produto, TipoPromocao tipoPromocao,
+                        int quantidade, BigDecimal precoComPromocao, BigDecimal precoBrutoSemPromocao) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.precoTotalLiquido = precoComPromocao;
+        this.precoBruto = precoBrutoSemPromocao;
+        this.carrinho = carrinho;
+        this.promocao = tipoPromocao;
+    }
+
+
 }

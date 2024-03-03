@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record CarrinhoRequest(@NotNull UUID idProduto) {
+public record CarrinhoRequest(@NotNull UUID idCliente) {
 }

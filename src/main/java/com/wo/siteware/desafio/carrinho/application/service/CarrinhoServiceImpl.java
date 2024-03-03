@@ -6,8 +6,6 @@ import com.wo.siteware.desafio.carrinho.application.repository.ItemCarrinhoRepos
 import com.wo.siteware.desafio.carrinho.domain.Carrinho;
 import com.wo.siteware.desafio.carrinho.domain.ItemCarrinho;
 import com.wo.siteware.desafio.produto.application.repository.ProdutoRepository;
-import com.wo.siteware.desafio.produto.application.service.ProdutoService;
-import com.wo.siteware.desafio.produto.domain.Produto;
 import com.wo.siteware.desafio.promocao.application.service.PromoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -40,7 +38,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     public void adicionarItemAoCarrinho(UUID idCarrinho, ItemCarrinhoRequest itemCarrinhoRequest) {
         var produto = produtoRepository.buscarUmProdutoPorId(itemCarrinhoRequest.idProduto());
         var carrinho = carrinhoRepository.buscarCarrinhoPorId(idCarrinho);
-        carrinho.adicionarProdutoAoCarrinho(produto, itemCarrinhoRequest.quantidade(), promoService);
+        carrinho.adicionaProdutoAoCarrinho(produto, itemCarrinhoRequest.quantidade(), promoService);
         carrinhoRepository.salvarCarrinho(carrinho);
     }
 
@@ -48,7 +46,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     public CarrinhoListResponse listarItensDoCarrinho(UUID idCarrinho) {
         Carrinho carrinho = carrinhoRepository.buscarCarrinhoPorId(idCarrinho);
         List<ItemCarrinho> itensDoCarrinho = itemCarrinhoRepository.acharCarrinho(carrinho);
-        BigDecimal totalDoCarrinho = carrinho.calcularTotalDosItens(itensDoCarrinho);
+        BigDecimal totalDoCarrinho = carrinho.calculaTotalDosItens(itensDoCarrinho);
         List<ItemCarrinhoResponse> listaItensDoCarrinho = ItemCarrinhoResponse.convert(itensDoCarrinho);
         return new CarrinhoListResponse(listaItensDoCarrinho, totalDoCarrinho);
     }
