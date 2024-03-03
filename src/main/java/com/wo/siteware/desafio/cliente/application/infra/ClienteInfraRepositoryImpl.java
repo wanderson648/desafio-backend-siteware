@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClienteInfraRepositoryImpl implements ClienteRepository {
 
-    private ClienteJpaRepository clienteJpaRepository;
+    private final ClienteJpaRepository clienteJpaRepository;
     @Override
     public Cliente salvaCliente(Cliente cliente) {
         return clienteJpaRepository.save(cliente);
