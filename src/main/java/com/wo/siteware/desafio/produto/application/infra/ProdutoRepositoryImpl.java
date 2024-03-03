@@ -29,5 +29,9 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
     }
 
+    @Override
+    public void deletarUmProduto(Produto produto) {
+        produtoSpringJpaRepository.delete(produto);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.wo.siteware.desafio.produto.domain;
 
+import com.wo.siteware.desafio.produto.application.api.ProdutoEditaRequest;
 import com.wo.siteware.desafio.produto.application.api.ProdutoRequest;
 import com.wo.siteware.desafio.promocao.domain.TipoPromocao;
 import jakarta.persistence.*;
@@ -42,5 +43,11 @@ public class Produto {
         this.preco = prodRequest.preco();
         this.promocao = prodRequest.promocao();
         this.dataHoraCadastro = LocalDate.now();
+    }
+
+    public void alterar(ProdutoEditaRequest produtoRequest) {
+        this.nome = produtoRequest.nome();
+        this.preco = produtoRequest.preco();
+        this.promocao = produtoRequest.promocao();
     }
 }

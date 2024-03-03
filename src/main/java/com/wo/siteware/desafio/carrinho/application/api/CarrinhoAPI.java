@@ -12,14 +12,24 @@ public interface CarrinhoAPI {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    CarrinhoResponse criarCarrinho(@RequestBody @Valid CarrinhoRequest carrinhoRequest);
+    CarrinhoResponse criaCarrinho(@RequestBody @Valid CarrinhoRequest carrinhoRequest);
 
     @PostMapping(path = "/{idCarrinho}/item")
     @ResponseStatus(code = HttpStatus.CREATED)
-    void adicionarItemCarrinho(@PathVariable UUID idCarrinho, @RequestBody @Valid ItemCarrinhoRequest itemCarrinhoRequest);
+    void adicionaItemCarrinho(@PathVariable UUID idCarrinho, @RequestBody @Valid ItemCarrinhoRequest itemCarrinhoRequest);
 
     @GetMapping(path = "/{idCarrinho}/item")
     @ResponseStatus(code = HttpStatus.OK)
-    CarrinhoListResponse listarItensDoCarrinho(@PathVariable UUID idCarrinho);
+    CarrinhoListResponse listaItensDoCarrinho(@PathVariable UUID idCarrinho);
 
+
+    @PatchMapping(path = "/{idCarrinho}/item/{idItemCarrinho}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+
+    void alteraItensDoCarrinho(@PathVariable UUID idCarrinho, @PathVariable UUID idItemCarrinho,
+                               @RequestBody @Valid ItemEditaCarrinhoRequest itemEditaCarrinhoRequest);
+
+    @DeleteMapping(path = "/{idCarrinho}/item/{idItemCarrinho}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void removeItensDoCarrinho(@PathVariable UUID idCarrinho, @PathVariable UUID idItemCarrinho);
 }

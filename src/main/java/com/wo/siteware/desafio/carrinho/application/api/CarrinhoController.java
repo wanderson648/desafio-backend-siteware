@@ -17,21 +17,28 @@ public class CarrinhoController implements CarrinhoAPI {
     private final CarrinhoService carrinhoService;
 
     @Override
-    public CarrinhoResponse criarCarrinho(CarrinhoRequest carrinhoRequest) {
-        log.info("[inicia] CarrinhoRestController - criarCarrinho");
-        CarrinhoResponse carrinho = carrinhoService.salvarCarrinho(carrinhoRequest);
-        log.info("[finaliza] CarrinhoRestController - criarCarrinho");
-        return carrinho;
+    public CarrinhoResponse criaCarrinho(CarrinhoRequest carrinhoRequest) {
+        return carrinhoService.salvarCarrinho(carrinhoRequest);
     }
 
     @Override
-    public void adicionarItemCarrinho(UUID idCarrinho, ItemCarrinhoRequest itemCarrinhoRequest) {
+    public void adicionaItemCarrinho(UUID idCarrinho, ItemCarrinhoRequest itemCarrinhoRequest) {
         carrinhoService.adicionarItemAoCarrinho(idCarrinho, itemCarrinhoRequest);
     }
 
     @Override
-    public CarrinhoListResponse listarItensDoCarrinho(UUID idCarrinho) {
+    public CarrinhoListResponse listaItensDoCarrinho(UUID idCarrinho) {
         return carrinhoService.listarItensDoCarrinho(idCarrinho);
+    }
+
+    @Override
+    public void alteraItensDoCarrinho(UUID idCarrinho, UUID idItemCarrinho, ItemEditaCarrinhoRequest itemEditaCarrinhoRequest) {
+        carrinhoService.alterarCarrinho(idCarrinho, idItemCarrinho, itemEditaCarrinhoRequest);
+    }
+
+    @Override
+    public void removeItensDoCarrinho(UUID idCarrinho, UUID idItemCarrinho) {
+        carrinhoService.removerItensDoCarrinho(idCarrinho, idItemCarrinho);
     }
 }
 

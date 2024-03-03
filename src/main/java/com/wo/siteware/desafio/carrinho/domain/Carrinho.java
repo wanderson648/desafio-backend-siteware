@@ -129,6 +129,13 @@ public class Carrinho {
         }
     }
 
+    public void removeItemDoCarrinho(ItemCarrinho itemCarrinho) {
+        boolean removido = itens.remove(itemCarrinho);
+        if (!removido) {
+            throw new RuntimeException( "Item de carrinho não encontrado");
+        }
+    }
+
 
 
 

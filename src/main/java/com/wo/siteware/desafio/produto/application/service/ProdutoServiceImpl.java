@@ -1,5 +1,6 @@
 package com.wo.siteware.desafio.produto.application.service;
 
+import com.wo.siteware.desafio.produto.application.api.ProdutoEditaRequest;
 import com.wo.siteware.desafio.produto.application.api.ProdutoListResponse;
 import com.wo.siteware.desafio.produto.application.api.ProdutoRequest;
 import com.wo.siteware.desafio.produto.application.api.ProdutoResponse;
@@ -10,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +22,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoResponse criaProduto(ProdutoRequest produtoRequest) {
-        log.info("[inicia] ProdutoRestController - postProduto");
         Produto produto = produtoRepository.salva(new Produto(produtoRequest));
-        log.info("[finaliza] ProdutoRestController - postProduto");
         return new ProdutoResponse(produto);
     }
 
@@ -31,6 +31,21 @@ public class ProdutoServiceImpl implements ProdutoService {
         List<Produto> produtos = produtoRepository.buscaProdutos();
         return ProdutoListResponse.convert(produtos);
     }
+
+    @Override
+    public void deletaUmProdutoPorId(UUID idProduto) {
+        Produto produto = produtoRepository.buscarUmProdutoPorId(idProduto);
+        produtoRepository.deletarUmProduto(produto);
+    }
+
+    @Override
+    public void alteraUmProduto(UUID idProduto, ProdutoEditaRequest produtoRequest) {
+        Produto produto = produtoRepository.buscarUmProdutoPorId(idProduto);
+        produto.alterar(produtoRequest);
+        produtoRepository.salva(produto);
+    }
+
+
 
 
 }

@@ -50,4 +50,21 @@ public class CarrinhoServiceImpl implements CarrinhoService {
         List<ItemCarrinhoResponse> listaItensDoCarrinho = ItemCarrinhoResponse.convert(itensDoCarrinho);
         return new CarrinhoListResponse(listaItensDoCarrinho, totalDoCarrinho);
     }
+
+    @Override
+    public void alterarCarrinho(UUID idCarrinho, UUID idItemCarrinho, ItemEditaCarrinhoRequest itemEditaCarrinhoRequest) {
+        var carrinho = carrinhoRepository.buscarCarrinhoPorId(idCarrinho);
+        var itemCarrinho = itemCarrinhoRepository.buscarItemCarrinhoPeloId(idItemCarrinho);
+        carrinho.atualizarQuantidadeItemExistente(itemCarrinho, itemEditaCarrinhoRequest.quantidade());
+        carrinhoRepository.salvarCarrinho(carrinho);
+    }
+
+    @Override
+    public void removerItensDoCarrinho(UUID idCarrinho, UUID idItemCarrinho) {
+        var carrinho = carrinhoRepository.buscarCarrinhoPorId(idCarrinho);
+        var itemCarrinho = itemCarrinhoRepository.buscarItemCarrinhoPeloId(idItemCarrinho);
+        carrinho.removeItemDoCarrinho(itemCarrinho);
+        itemCarrinhoRepository.deletaItemCarrinho(itemCarrinho);
+        carrinho.recalculaTotal();
+    }
 }

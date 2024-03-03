@@ -1,12 +1,12 @@
 package com.wo.siteware.desafio.produto.application.api;
 
 import com.wo.siteware.desafio.produto.application.service.ProdutoService;
-import com.wo.siteware.desafio.produto.domain.Produto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,15 +17,22 @@ public class ProdutoController implements ProdutoAPI {
 
     @Override
     public ProdutoResponse postProduto(ProdutoRequest produtoRequest) {
-        log.info("[inicia] ProdutoRestController - postProduto");
-        ProdutoResponse produto = produtoService.criaProduto(produtoRequest);
-        log.info("[finaliza] ProdutoRestController - postProduto");
-        return produto;
+        return produtoService.criaProduto(produtoRequest);
     }
 
     @Override
     public List<ProdutoListResponse> buscaProdutos() {
         return produtoService.buscaProdutos();
+    }
+
+    @Override
+    public void deletarUmProdutoPorId(UUID idProduto) {
+        produtoService.deletaUmProdutoPorId(idProduto);
+    }
+
+    @Override
+    public void alterarUmProduto(UUID idProduto, ProdutoEditaRequest produtoRequest) {
+        produtoService.alteraUmProduto(idProduto, produtoRequest);
     }
 
 }
