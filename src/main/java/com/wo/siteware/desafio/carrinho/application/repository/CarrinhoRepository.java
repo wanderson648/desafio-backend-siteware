@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CarrinhoRepository {
-    Carrinho salvarCarrinho(Carrinho carrinho);
     Carrinho buscarCarrinhoPorId(UUID idCarrinho);
+
+    Carrinho salvarCarrinho(Carrinho carrinho);
 }

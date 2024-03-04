@@ -5,6 +5,7 @@ import com.wo.siteware.desafio.cliente.application.api.ClienteRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class Cliente {
     private UUID idCliente;
     @NotBlank
     private String nomeCompleto;
-
+    @CPF
     private String cpf;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

@@ -17,7 +17,6 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class CarrinhoServiceImpl implements CarrinhoService {
 
     private final PromoService promoService;
@@ -27,10 +26,8 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
     @Override
     public CarrinhoResponse salvarCarrinho(CarrinhoRequest carrinhoRequest) {
-        log.info("[inicia] CarrinhoApplicationService - salvarCarrinho");
         var carrinho = new Carrinho(carrinhoRequest);
         carrinhoRepository.salvarCarrinho(carrinho);
-        log.info("[finaliza] CarrinhoApplicationService - salvarCarrinho");
         return new CarrinhoResponse(carrinho);
     }
 
@@ -64,7 +61,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
         var carrinho = carrinhoRepository.buscarCarrinhoPorId(idCarrinho);
         var itemCarrinho = itemCarrinhoRepository.buscarItemCarrinhoPeloId(idItemCarrinho);
         carrinho.removeItemDoCarrinho(itemCarrinho);
-        itemCarrinhoRepository.deletaItemCarrinho(itemCarrinho);
+        itemCarrinhoRepository.deletarItemCarrinho(itemCarrinho);
         carrinho.recalculaTotal();
     }
 }

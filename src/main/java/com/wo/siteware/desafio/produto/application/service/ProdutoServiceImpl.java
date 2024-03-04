@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class ProdutoServiceImpl implements ProdutoService {
 
     private final ProdutoRepository produtoRepository;
