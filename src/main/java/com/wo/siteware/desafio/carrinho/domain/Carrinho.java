@@ -6,10 +6,7 @@ import com.wo.siteware.desafio.produto.domain.Produto;
 import com.wo.siteware.desafio.promocao.application.service.PromoService;
 import com.wo.siteware.desafio.promocao.domain.TipoPromocao;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,10 +16,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Entity
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class Carrinho {
+public class    Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "uuid", name = "idCarrinho", updatable = false, unique = true, nullable = false)
